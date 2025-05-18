@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../environment';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
+import { UsuarioRegistro } from './models/usuario-registro.model';
 
 @Injectable({
   providedIn: 'root'
@@ -26,5 +27,17 @@ export class AppService {
             .set('nombre', nombre)
             .set('genero', genero);
         return this.http.get(this.url + '/libro/filtrar_libros', { params });
+    }
+
+    registrarUsuario(infoRegUser: UsuarioRegistro) {
+        return this.http.post(this.url + '/auth/register', infoRegUser);
+    }
+
+    iniciarSesion(correo:string, contrasena:string) {
+        const body = {
+            "email": correo,
+            "password": contrasena
+        }
+        return this.http.post(this.url + '/auth/login', body);
     }
 }

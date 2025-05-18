@@ -27,16 +27,16 @@
     <div class="horizontal-line"></div>
 
     <div class="secondRow">
-        <div id="left-column-2r" style="cursor: pointer;">
+        <div id="left-column-2r" style="cursor: pointer;" (click)="redirect('home')">
             <img class="img-fluid" type="image/x-png" src="icon.png" alt="Ecommerce Icon" width="60px">
             <h4>Not An Ebook</h4>
         </div>
 
         <div class="buscador">
             <div class="input-group">
-                <input type="search" id="barra-busqueda" [(ngModel)]="tituloLibro" class="form-control" placeholder="¡Busca tu libro aquí!"
+                <input type="search" id="barra-busqueda" [(ngModel)]="tituloLibro" (keydown)="onKeydown($event)" class="form-control" placeholder="¡Busca tu libro aquí!"
                     aria-label="Search" aria-describedby="search-addon" />
-                <button id="btn-buscar-libro" type="button" class="btn"> <i class="bi bi-search icon-large"></i>
+                <button id="btn-buscar-libro" (click)="onSearch()" type="button" class="btn"> <i class="bi bi-search icon-large"></i>
                 </button>
             </div>
         </div>

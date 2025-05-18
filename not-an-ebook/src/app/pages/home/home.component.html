@@ -5,7 +5,7 @@
             <div class="carousel-item active">
                 <div class="d-flex justify-content-center flex-wrap gap-2 p-3">
                     <div *ngFor="let genero of carruselMainSlide" class="card-generos">
-                        <button class="card" [value]="genero.nombre">
+                        <button class="card" [value]="genero.nombre" (click)="searchByGenero(genero.nombre)">
                             <img [src]="genero.portada" class="card-img-top" alt="genero literario" ngSrcNoIntrinsicSize width="135" height="190">
                             <div class="card-body mt-1">
                                 <p class="card-text">{{ genero.nombre }}</p>
@@ -18,7 +18,7 @@
             <div class="carousel-item">
                 <div class="d-flex justify-content-center flex-wrap gap-2 p-3">
                     <div *ngFor="let genero of carrusel2ndSlide" class="card-generos">
-                        <button class="card" [value]="genero.nombre">
+                        <button class="card" [value]="genero.nombre" (click)="searchByGenero(genero.nombre)">
                             <img [src]="genero.portada" class="card-img-top" alt="genero literario" ngSrcNoIntrinsicSize width="135" height="190">
                             <div class="card-body mt-1">
                                 <p class="card-text">{{ genero.nombre }}</p>

@@ -59,4 +59,8 @@ export class HomeComponent implements OnInit{
       }
     );
   }
+
+  searchByGenero(genero: string) {
+    this.router.navigate(['/buscarLibro'], { queryParams: { titulo: '', genero: genero } });
+  }
 }

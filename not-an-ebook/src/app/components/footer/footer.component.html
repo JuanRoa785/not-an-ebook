@@ -16,21 +16,15 @@
         <p style="color: white; margin-bottom: 5px; font-size: 14px;">GENEROS LITERARIOS </p>
         <div id="links-generos-Literarios">
             <div class="column">
-                <a>Fantasía</a>
-                <a>Thriller</a>
-                <a>Distopía</a>
-                <a>Aventura</a>
-                <a>Ciencia Ficción</a>
-                <a>Terror</a>
+                <a *ngFor="let genero of generosCol1" (click)="searchByGenero(genero.nombre)">
+                    {{ genero.nombre }}
+                </a>
             </div>
-
+            
             <div class="column">
-                <a>Histórica</a>
-                <a>Infantil</a>
-                <a>Romántica</a>
-                <a>Contemporáneo</a>
-                <a>Poesía</a>
-                <a>Paranormal</a>
+                <a *ngFor="let genero of generosCol2" (click)="searchByGenero(genero.nombre)">
+                    {{ genero.nombre }}
+                </a>
             </div>
         </div>
     </div>

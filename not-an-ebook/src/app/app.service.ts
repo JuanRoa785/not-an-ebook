@@ -20,4 +20,11 @@ export class AppService {
     getLibros(): Observable<any> {
         return this.http.get(this.url + '/libro/listarLibros');
     }
+
+    getLibrosFlitrados(nombre:string, genero:string): Observable<any> {
+        const params = new HttpParams()
+            .set('nombre', nombre)
+            .set('genero', genero);
+        return this.http.get(this.url + '/libro/filtrar_libros', { params });
+    }
 }

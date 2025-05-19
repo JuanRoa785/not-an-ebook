@@ -3,6 +3,7 @@ import { environment } from '../environment';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { UsuarioRegistro } from './models/usuario-registro.model';
+import { TokenService } from './token.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,8 @@ export class AppService {
     url = environment.Url;
 
     constructor(
-        private http: HttpClient
+        private http: HttpClient,
+        private tokenService:TokenService
     ) {}
 
     getGenerosLiterarios(): Observable<any> {
@@ -39,5 +41,14 @@ export class AppService {
             "password": contrasena
         }
         return this.http.post(this.url + '/auth/login', body);
+    }
+
+    getDireccion(idUsuario:number){
+        const token = this.tokenService.getToken();
+        const headers = new HttpHeaders({
+            'Authorization': `Bearer ${token}`
+        });
+
+        return this.http.get(this.url + `/direccion/usuario/${idUsuario}`, { headers });
     }
 }

@@ -43,7 +43,7 @@ export class TokenService {
       return of('2'); // valor por defecto
     }
 
-    return this.validToken().pipe(
+    return this.getUser().pipe(
       map((response) => response.tipoUsuario.id.toString()),
       catchError((error) => {
         this.clearToken();
@@ -53,7 +53,7 @@ export class TokenService {
   }
 
 
-  validToken(): Observable<any> {
+  getUser(): Observable<any> {
     const token = this.getToken();
     const correo = this.getUserEmail()?.sub || 'n.a';
 
@@ -72,7 +72,7 @@ export class TokenService {
     if (this.getToken() == null || !this.getUserEmail()) {
       return of(false);
     } else {
-      return this.validToken().pipe(
+      return this.getUser().pipe(
         map((response) => {
           //console.log(response)
           return true;

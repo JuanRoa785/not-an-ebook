@@ -1,3 +1,10 @@
+#page-menu {
+    width: 100vw;
+    flex: 1;    
+    display: flex;
+    justify-content: center;          
+}
+
 .nav {
     border: 1px solid rgb(214, 212, 212);
     box-shadow: 5px 5px 10px rgb(214, 212, 212);

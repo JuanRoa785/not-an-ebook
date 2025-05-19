@@ -1,7 +1,6 @@
 export interface User {
-    sub: string;      
-    correo: string;
     exp:number;
-    tipo:number;
-    nombre: string;   
+    iat:number;
+    sub: string;      
+    name: string; 
   }

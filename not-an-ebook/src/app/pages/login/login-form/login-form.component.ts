@@ -75,7 +75,7 @@ export class LoginFormComponent {
           if (response) {
             //console.log(response)
             this.tokenService.setToken(response.access_token);
-            this.router.navigate(['/']);
+            window.location.href = '/';
           }
         },
         (error) => {

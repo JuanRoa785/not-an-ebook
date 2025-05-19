@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { jwtDecode } from "jwt-decode";
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../environment';
-import { HttpHeaders } from '@angular/common/http';
+import { HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { User } from './models/usuario.model';
@@ -13,7 +13,6 @@ import { User } from './models/usuario.model';
 export class TokenService {
   constructor(private http: HttpClient) { }
   url = environment.Url;
-  private token: string = '';
   private tokenKey: string = 'token';
 
   setToken(token: string) {
@@ -28,7 +27,7 @@ export class TokenService {
     localStorage.removeItem(this.tokenKey);
   }
 
-  getUser(): User | null{
+  getUserEmail(): User | null{
     var token = this.getToken();
     if (token != null) {
       //console.log(jwtDecode(token));
@@ -39,24 +38,47 @@ export class TokenService {
     }
   }
 
+  getUserRole(): Observable<string> {
+    if (!this.getToken() || !this.getUserEmail()) {
+      return of('2'); // valor por defecto
+    }
+
+    return this.validToken().pipe(
+      map((response) => response.tipoUsuario.id.toString()),
+      catchError((error) => {
+        this.clearToken();
+        return of('2');
+      })
+    );
+  }
+
+
   validToken(): Observable<any> {
     const token = this.getToken();
+    const correo = this.getUserEmail()?.sub || 'n.a';
+
     const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`
+      'Authorization': `Bearer ${token}` 
     });
+
+    const params = new HttpParams()
+      .set('email', correo);
+
     //console.log(token);
-    return this.http.get(this.url + '/usuario/validToken', { headers });
+    return this.http.get(this.url + '/auth/listByEmail', { headers, params });
   }
 
   isAuthenticated(): Observable<boolean> {
-    if (this.getToken() == null) {
+    if (this.getToken() == null || !this.getUserEmail()) {
       return of(false);
     } else {
       return this.validToken().pipe(
         map((response) => {
-          return response === true;
+          //console.log(response)
+          return true;
         }),
         catchError((error) => {
+          this.clearToken();
           return of(false);
         })
       );

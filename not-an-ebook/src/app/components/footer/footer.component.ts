@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule} from '@angular/common';
 import { Router } from '@angular/router';
 import { AppService } from '../../app.service';
+import { TokenService } from '../../token.service';
 
 @Component({
   selector: 'app-footer',
@@ -13,7 +14,8 @@ import { AppService } from '../../app.service';
 export class FooterComponent implements OnInit{
   constructor(
     private router: Router,
-    private appService: AppService
+    private appService: AppService,
+    private tokenService:TokenService
   ) { }
 
   ngOnInit(): void {
@@ -40,5 +42,54 @@ export class FooterComponent implements OnInit{
 
   searchByGenero(genero: string) {
     this.router.navigate(['/buscarLibro'], { queryParams: { titulo: '', genero: genero } });
+  }
+
+  redirect(destino:string) {
+    var userAuth:boolean = true;
+
+    this.tokenService.isAuthenticated().subscribe(
+      (isAuth) => {
+        if (!isAuth) {
+          userAuth = false;
+        }
+      }
+    );
+
+    switch (destino) {
+      case 'home':
+        this.router.navigate(['/']);
+        break;
+      case 'perfil':
+        if (!userAuth) {
+          this.router.navigate(['/login']);
+        } else {
+          this.router.navigate(['/cliente/perfil']);
+        }
+        break;
+      case 'carrito':
+        if (!userAuth) {
+          this.router.navigate(['/login']);
+        } else {
+          this.router.navigate(['/cliente/carrito']);
+        }
+        break;
+      case 'historial':
+        if (!userAuth) {
+          this.router.navigate(['/login']);
+        } else {
+          this.router.navigate(['/cliente/historialCompras']);
+        }
+        break;
+      case 'admin':
+        if (!userAuth) {
+          this.router.navigate(['/login']);
+        } else {
+          this.router.navigate(['/admin/inventario']);
+        }
+        break;
+
+      default:
+        break;
+    }
   }
 }

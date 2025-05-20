@@ -49,6 +49,40 @@ export class AppService {
             'Authorization': `Bearer ${token}`
         });
 
-        return this.http.get(this.url + `/direccion/usuario/${idUsuario}`, { headers });
+        return this.http.get<any[]>(this.url + `/direccion/usuario/${idUsuario}`, { headers });
+    }
+
+    actualizarDireccion(direccion:any){
+        const token = this.tokenService.getToken();
+        const headers = new HttpHeaders({
+            'Authorization': `Bearer ${token}`
+        });
+
+        var formatJson:any = {
+            pais: direccion.pais,
+            region: direccion.region,
+            ciudad: direccion.ciudad,
+            codigo_postal: direccion.codigo_postal,
+            direccion: direccion.direccion,
+            usuario: {
+                id: direccion.idUsuario
+            }
+        }
+
+        if (direccion.id && direccion.id !== 0) {
+            formatJson['id'] = direccion.id;
+            return this.http.put(`${this.url}/direccion/${direccion.id}`, formatJson, { headers });
+        }
+
+        return this.http.post(this.url + `/direccion/ingresarDireccion`, formatJson, { headers });
+    }
+
+    eliminarDireccion(direccion:any){
+        const token = this.tokenService.getToken();
+        const headers = new HttpHeaders({
+            'Authorization': `Bearer ${token}`
+        });
+
+        return this.http.delete(this.url + `/direccion/${direccion.id}`, { headers });
     }
 }

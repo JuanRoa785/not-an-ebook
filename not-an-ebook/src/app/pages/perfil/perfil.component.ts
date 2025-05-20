@@ -6,6 +6,8 @@ import { TokenService } from '../../token.service';
 import { AppService } from '../../app.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalDireccionComponent } from '../../components/modal-direccion/modal-direccion.component';
+import { ModalVerifComponent } from '../../components/modal-verif/modal-verif.component';
+
 
 @Component({
   selector: 'app-perfil',
@@ -70,6 +72,7 @@ export class PerfilComponent  implements OnInit{
     this.tokenService.getUser().subscribe(
       (response) => {
         this.user = response;
+        this.direccion.idUsuario = this.user.id
         this.getDireccion();
       },
       (error) => {
@@ -80,8 +83,9 @@ export class PerfilComponent  implements OnInit{
 
   getDireccion(){
     this.appService.getDireccion(this.user.id).subscribe(
-      (response) => {
-        console.log(response);
+      (response: any[]) => {
+        this.direccion = response[0];
+        //console.log(response[0]);
       },
       (error) => {
         console.error('Error obteniendo la dirección del usuario:', error);
@@ -90,7 +94,12 @@ export class PerfilComponent  implements OnInit{
   }
 
   openModalDireccion() {
-    const modalRef = this.modalService.open(ModalDireccionComponent);
+    const modalRef = this.modalService.open(
+      ModalDireccionComponent, {
+        backdrop: 'static',
+        centered: true,
+      }
+    );
     
     //Generamos una copia de this.direccion para que sean "independientes"
     modalRef.componentInstance.address = JSON.parse(JSON.stringify(this.direccion));
@@ -98,5 +107,38 @@ export class PerfilComponent  implements OnInit{
     modalRef.closed.subscribe(() => {
       this.getDireccion();
     });
+  }
+
+  eliminarDireccion() {
+    if (this.direccion.id == 0) {
+      return;
+    }
+
+    this.appService.eliminarDireccion(this.direccion).subscribe(
+      (response) => {
+        //console.log(response);
+        window.location.href = '/cliente/perfil'; //recargar la pagina
+      },
+      (error) => {
+        console.error('Error eliminando la dirección del usuario:', error);
+      }
+    );
+  }
+
+  verifEliminarDireccion() {
+    const modalRef = this.modalService.open(
+      ModalVerifComponent, {
+        backdrop: 'static',
+        centered: true,
+      }
+    );
+
+    const infoModal = {
+      titulo: '¿Está Seguro? ',
+      mensaje: '¿De verdad quiere eliminar su dirección?<br><br>Tendrá que anexar una nueva para poder comprar cualquier producto'
+    };
+
+    modalRef.componentInstance.modal = infoModal;
+    modalRef.componentInstance.tareaARealizar = () => this.eliminarDireccion();
   }
 }

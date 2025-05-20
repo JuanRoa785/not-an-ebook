@@ -18,8 +18,8 @@ export class ModalDireccionComponent {
 
   constructor(
     public activeModal: NgbActiveModal, 
-    private appService: AppService) { 
-  }
+    private appService: AppService
+  ) {}
 
   @Input() address!: {
     id: number,
@@ -77,7 +77,7 @@ export class ModalDireccionComponent {
 
     this.appService.actualizarDireccion(this.address).subscribe(
       (response) => {
-        console.log(response);
+        //console.log(response);
         this.closeModal();
       },
       (error) => {
@@ -87,6 +87,6 @@ export class ModalDireccionComponent {
   }
 
   closeModal() {
-    this.activeModal.close()
+    this.activeModal.close();
   }
 }

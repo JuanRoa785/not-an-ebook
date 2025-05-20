@@ -21,37 +21,30 @@
                 <div class="mb-3">
                     <p class="form-label"> Nueva Contraseña:</p>
                     <div class="password-toggle" style="display: flex; align-items: center;">
-                        <input type="password" class="form-control" name="password" id="card-password"
+                        <input type="{{ isPasswordVisible ? 'text' : 'password' }}" [(ngModel)]="updPassword" class="form-control" name="password" id="card-password"
                             placeholder="8+ Caracteres">
-                        <i class="bi bi-eye" style="cursor: pointer;" id="card-show-password-icon"></i>
+                        <i (click)="togglePasswordsVisibility(true)" [ngClass]="isPasswordVisible ? 'bi-eye' : 'bi-eye-slash'" class="bi" style="cursor: pointer;" id="card-show-password-icon"></i>
                     </div>
-
-                    <p id="error-password" style=" display: none; color: red; font-weight: 600; margin-left: 25px;">
-                        * La contraseña debe tener mas de 8 caracteres *
-                    </p>
                 </div>
 
                 <div class="mb-3">
                     <p class="form-label">Confirmar Nueva Contraseña:</p>
 
                     <div class="password-toggle" style="display: flex; align-items: center;">
-                        <input type="password" class="form-control" name="password" id="card-repeat-password"
+                        <input type="{{ isRepeatPasswordVisible ? 'text' : 'password' }}" [(ngModel)]="updRepeatPassword" class="form-control" name="repeatPassword" id="card-repeat-password"
                             placeholder="8+ Caracteres">
-                        <i class="bi bi-eye" style="cursor: pointer;" id="card-rep-show-password-icon"></i>
+                        <i (click)="togglePasswordsVisibility(false)" [ngClass]="isRepeatPasswordVisible ? 'bi-eye' : 'bi-eye-slash'" class="bi" style="cursor: pointer;" id="card-rep-show-password-icon"></i>
                     </div>
-
-                    <p id="repeat-password-length"
-                        style=" display: none; color: red; font-weight: 600; margin-left: 25px;">
-                        * La contraseña debe tener mas de 8 caracteres *
-                    </p>
-
-                    <p id="repeat-equal-password"
-                        style=" display: none; color: red; font-weight: 600; margin-bottom: 5px; margin-left: 25px;">
-                        * Las contraseñas deben ser iguales*</p>
                 </div>
                 <div class="d-flex justify-content-center">
-                    <button id="btn-update-constrasena" type="button" class="profile-button">Actualizar
-                        Contraseña</button>
+                    <button (click)="actualizarContrasena()" id="btn-update-constrasena" type="button" class="profile-button">
+                        Actualizar Contraseña
+                    </button>
+                </div>
+                <div *ngIf="strError.length > 1" style="display: flex; justify-content: center; align-items: center;">
+                    <p id="direccion-error-general" class="mt-1" style="color: red; font-weight: 600; text-align: center;">
+                        {{strError}}
+                    </p>
                 </div>
             </form>
         </div>

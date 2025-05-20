@@ -101,4 +101,21 @@ export class AppService {
 
         return this.http.put(this.url + `/auth/update`, formatJson, { headers });
     }
+
+    actualizarContrasena(usuario: any, password:string) {
+        const token = this.tokenService.getToken();
+        const headers = new HttpHeaders({
+            'Authorization': `Bearer ${token}`
+        });
+
+        var formatJson: any = {
+            name: usuario.nombres,
+            apellidos: usuario.apellidos,
+            correo: usuario.email,
+            telefono: usuario.telefono,
+            contrasena: password
+        }
+
+        return this.http.put(this.url + `/auth/update`, formatJson, { headers });
+    }
 }

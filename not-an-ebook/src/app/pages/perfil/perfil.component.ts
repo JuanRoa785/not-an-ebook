@@ -157,4 +157,53 @@ export class PerfilComponent  implements OnInit{
       this.getUserData();
     });
   }
+
+  updPassword:string = '';
+  updRepeatPassword:string = '';
+
+  strError:string = '';
+
+  logout() {
+    this.tokenService.clearToken();
+    window.location.href = '/';
+  }
+
+  actualizarContrasena() {
+    this.strError = ''; 
+
+    if (this.updPassword.trim().length < 8 || this.updRepeatPassword.trim().length < 8) {
+      this.strError = '* Las contraseñas deben tener minimo 8 caracteres *'; 
+      return;
+    }
+
+    if (this.updPassword.trim() != this.updRepeatPassword.trim()) {
+      this.strError = '* Las contraseñas no coinciden *'; 
+      return;
+    }
+
+    this.appService.actualizarContrasena(this.user, this.updPassword.trim()).subscribe(
+      (response) => {
+        //console.log(response);
+
+        //Abrimos un modal que nos redirigirá al inicio de sesión
+        const modalRef = this.modalService.open(
+          ModalVerifComponent, {
+          backdrop: 'static',
+          centered: true,
+        }
+        );
+
+        const infoModal = {
+          titulo: 'Actualización Exitosa',
+          mensaje: 'Ya que ha actualizado su contraseña, por favor inicie sesión nuevamente'
+        };
+
+        modalRef.componentInstance.modal = infoModal;
+        modalRef.componentInstance.tareaARealizar = () => this.logout();
+      },
+      (error) => {
+        console.error('Error actualizando la contraseña del usuario:', error);
+      }
+    );
+  }
 }

@@ -3,11 +3,12 @@ import { FormsModule } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { TokenService } from '../../token.service';
+import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, NgbCollapseModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
@@ -99,5 +100,7 @@ export class HeaderComponent implements OnInit{
         break;
     }
   }
+
+  isNavbarCollapsed = true;
   
 }

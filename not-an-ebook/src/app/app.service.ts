@@ -85,4 +85,20 @@ export class AppService {
 
         return this.http.delete(this.url + `/direccion/${direccion.id}`, { headers });
     }
+
+    actualizarPerfil(usuario: any) {
+        const token = this.tokenService.getToken();
+        const headers = new HttpHeaders({
+            'Authorization': `Bearer ${token}`
+        });
+
+        var formatJson: any = {
+            name: usuario.nombres,
+            apellidos: usuario.apellidos,
+            correo: usuario.email,
+            telefono: usuario.telefono,
+        }
+
+        return this.http.put(this.url + `/auth/update`, formatJson, { headers });
+    }
 }

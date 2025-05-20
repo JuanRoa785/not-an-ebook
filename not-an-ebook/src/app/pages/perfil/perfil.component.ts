@@ -7,7 +7,7 @@ import { AppService } from '../../app.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalDireccionComponent } from '../../components/modal-direccion/modal-direccion.component';
 import { ModalVerifComponent } from '../../components/modal-verif/modal-verif.component';
-
+import { ModalPerfilComponent } from '../../components/modal-perfil/modal-perfil.component';
 
 @Component({
   selector: 'app-perfil',
@@ -140,5 +140,21 @@ export class PerfilComponent  implements OnInit{
 
     modalRef.componentInstance.modal = infoModal;
     modalRef.componentInstance.tareaARealizar = () => this.eliminarDireccion();
+  }
+
+  openModalPerfil() {
+    const modalRef = this.modalService.open(
+      ModalPerfilComponent, {
+        backdrop: 'static',
+        centered: true,
+      }
+    );
+    
+    //Generamos una copia de this.user para que sean "independientes"
+    modalRef.componentInstance.usuario = JSON.parse(JSON.stringify(this.user));
+    
+    modalRef.closed.subscribe(() => {
+      this.getUserData();
+    });
   }
 }

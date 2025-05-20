@@ -7,7 +7,7 @@
             <p id="card-correo"><b style="font-weight: 600;">Correo: </b>{{user.email}}</p>
             <p id="card-telefono"><b style="font-weight: 600;">Teléfono: </b>{{user.telefono}}</p>
             <div class="d-flex justify-content-center">
-                <button class="profile-button" data-bs-toggle="modal" data-bs-target="#modal-datos-personales">
+                <button (click)="openModalPerfil()" class="profile-button" data-bs-toggle="modal" data-bs-target="#modal-datos-personales">
                     Editar Perfil
                 </button>
             </div>

@@ -47,7 +47,46 @@ export class ModalDireccionComponent {
 
   strError:String = "";
 
-  closeVerifModal() {
+  actualizarDireccion() {
+    this.strError = "";
+
+    if (this.address.pais == '' || this.address.pais == 'N.A') {
+      this.strError = "* El pais ingresado es invalido *";
+      return;
+    }
+
+    if (this.address.region == '' || this.address.region == 'N.A') {
+      this.strError = "* La región ingresada es invalida *";
+      return;
+    }
+
+    if (this.address.ciudad == '' || this.address.ciudad == 'N.A') {
+      this.strError = "* La ciudad ingresada es invalida *";
+      return;
+    }
+
+    if (this.address.codigo_postal == '' || this.address.codigo_postal == 'N.A') {
+      this.strError = "* El codigo postal ingresado es invalido *";
+      return;
+    }
+
+    if (this.address.direccion == '' || this.address.direccion == 'N.A') {
+      this.strError = "* La dirección ingresada es invalida *";
+      return;
+    }
+
+    this.appService.actualizarDireccion(this.address).subscribe(
+      (response) => {
+        console.log(response);
+        this.closeModal();
+      },
+      (error) => {
+        console.error('Error actualizando la dirección del usuario:', error);
+      }
+    );
+  }
+
+  closeModal() {
     this.activeModal.close()
   }
 }

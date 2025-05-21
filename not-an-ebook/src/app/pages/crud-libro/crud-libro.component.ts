@@ -130,7 +130,7 @@ export class CrudLibroComponent {
 
         const infoModal = {
           titulo: 'Operación Exitosa',
-          mensaje: 'Se actualizó la información correctamente, puede observarla en el inventario:'
+          mensaje: 'Se actualizó la información correctamente, puede verificarla en el inventario'
         };
 
         modalRef.componentInstance.modal = infoModal;

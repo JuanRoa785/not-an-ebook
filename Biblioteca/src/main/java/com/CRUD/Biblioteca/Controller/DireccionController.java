@@ -9,7 +9,6 @@ import com.CRUD.Biblioteca.Service.DireccionService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -47,7 +46,6 @@ public class DireccionController {
         List<DireccionDTO> direccionesDTO = direcciones.stream()
                 .map(DireccionDTO::new)
                 .collect(Collectors.toList());
-
         return ResponseEntity.ok(direccionesDTO);
     }
 

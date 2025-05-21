@@ -34,13 +34,14 @@ export class HomeComponent implements OnInit{
   getLatestLibros(): void {
     this.appService.getLibros().subscribe(
       (response) => {
-        this.latestLibros = response.sort((a: any, b: any) => b.fecha_publicacion - a.fecha_publicacion); //Ordena de mas reciente a mas viejo
+        this.latestLibros = response.sort((a: any, b: any) => 
+          new Date(b.fecha_publicacion).getTime() - new Date(a.fecha_publicacion).getTime()); //Ordena de mas reciente a mas viejo
         this.latestLibros = this.latestLibros.slice(0, 10);
         this.librosRow1 = response.slice(0, 5);
         this.librosRow2 = response.slice(5, 10);
       },
       (error) => {
-        console.error('Error cargando los libros mas recientes:', error);
+        console.error('Error cargando la dirección del usuario:', error);
       }
     );
   }
@@ -57,5 +58,9 @@ export class HomeComponent implements OnInit{
         console.error('Error cargando los generos Literarios mas recientes:', error);
       }
     );
+  }
+
+  searchByGenero(genero: string) {
+    this.router.navigate(['/buscarLibro'], { queryParams: { titulo: '', genero: genero } });
   }
 }

@@ -19,7 +19,7 @@ export class MenuAdminComponent {
     this.tokenService.isAuthenticated().subscribe(
       (isAuth) => {
         if (!isAuth) {
-          alert("No has iniciado sesión, por favor hazo e intenta nuevamente.");
+          alert("No has iniciado sesión, por favor hazlo e intenta nuevamente.");
           this.router.navigate(['/login']);
         }
       }

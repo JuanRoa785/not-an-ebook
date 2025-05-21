@@ -12,6 +12,7 @@ import { MenuAdminComponent } from './components/menu-admin/menu-admin.component
 import { InventarioComponent } from './pages/inventario/inventario.component';
 import { CrudLibroComponent } from './pages/crud-libro/crud-libro.component';
 import { ReporteComponent } from './pages/reporte/reporte.component';
+import { CheckoutComponent } from './pages/checkout/checkout.component';
 
 export const routes: Routes = [
     {
@@ -46,6 +47,10 @@ export const routes: Routes = [
           { path: 'reporte', component: ReporteComponent },
           { path: '', redirectTo: 'inventario', pathMatch: 'full' } 
         ]    
+    },
+    {
+        path: 'checkout',
+        component: CheckoutComponent
     },
     {
         path: '**',

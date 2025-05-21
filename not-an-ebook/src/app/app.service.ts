@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { UsuarioRegistro } from './models/usuario-registro.model';
 import { TokenService } from './token.service';
+import { switchMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -170,6 +171,37 @@ export class AppService {
         });
 
         return this.http.delete(this.url + `/libro/${idLibro}`, { headers });
+    }
+
+    obtenerCarrito() {
+        const token = this.tokenService.getToken();
+        const headers = new HttpHeaders({
+            'Authorization': `Bearer ${token}`
+        });
+
+        const params = new HttpParams()
+            .set('email', this.tokenService.getUserEmail()?.sub || 'n.a'
+        );
+
+        return this.http.get(this.url + `/carrito/listByEmail`, { headers, params });
+    }
+
+    agregarLibroCarrito(idLibro:number, cantidad: number) {
+        const token = this.tokenService.getToken();
+        const headers = new HttpHeaders({
+            'Authorization': `Bearer ${token}`
+        });
+
+        return this.obtenerCarrito().pipe(
+            switchMap((response: any) => {
+                const formatJson = {
+                    idCarrito: response.id,
+                    idLibro: idLibro,
+                    cantidad: cantidad,
+                };
+                return this.http.post(this.url + `/detalle-carrito/agregar`, formatJson, { headers });
+            })
+        );
     }
 
 }

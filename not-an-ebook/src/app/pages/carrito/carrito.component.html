@@ -1,1 +1,40 @@
-<p>carrito works!</p>
+<div class="d-flex" id="container" style="margin-top: 25px;">
+    <div class="col-14" style="border-bottom: 0px;">
+        <p style="font-size: 16px; font-weight: 600; margin: 5px; text-align: center;">CARRITO DE COMPRAS</p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">LIBRO</th>
+                    <th scope="col">PRECIO</th>
+                    <th scope="col">IMPUESTO</th>
+                    <th scope="col">$ CON IMPUESTOS</th>
+                    <th scope="col">CANTIDAD</th>
+                    <th scope="col">SUB-TOTAL</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="6" style="text-align: center;">
+                        <div class="d-flex align-items-center justify-content-center">
+                            <i id="spinning-loading-arrow" class="bi bi-arrow-repeat spin"></i>
+                            <span class="ms-2">Cargando...</span>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div id="subtotal">
+        <p style="font-size: 18px; font-weight: 600; margin: 5px; text-align: center;"> Resumen Carrito</p>
+        <div style="width: 100%; border-bottom: 1px solid rgb(214, 212, 212); margin-bottom: 5px;"></div>
+        <p><b style="font-weight: 600;">Sub-Total: </b>COP $0</p>
+        <p><b style="font-weight: 600;">Envio: </b> Gratis </p>
+        <p><b style="font-weight: 600;">Descuento: </b> COP $0</p>
+        <div style="width: 100%; border-bottom: 1px solid rgb(214, 212, 212); margin-bottom: 5px;"></div>
+        <p> <b style="font-weight: 600;">Total: COP $0</b></p>
+        <div class="d-flex justify-content-center">
+            <button class="res-button">PROCEDER AL CHECKOUT <i class="bi bi-arrow-right"></i></button>
+        </div>
+    </div>
+</div>

@@ -19,8 +19,8 @@
             </div>
 
             <div class="row-buttons">
-                <button id="book-card-red-cart" class="book-card-redirects"><i class="bi bi-cart fs-4"></i></button>
-                <button class="book-card-redirects"><i class="bi bi-credit-card-fill fs-4"></i></button>
+                <button (click)="iniciarCompra('carrito')" id="book-card-red-cart" class="book-card-redirects"><i class="bi bi-cart fs-4"></i></button>
+                <button (click)="iniciarCompra('checkout')" class="book-card-redirects"><i class="bi bi-credit-card-fill fs-4"></i></button>
             </div>
         </div>
     </div>
@@ -97,12 +97,12 @@
                     </div>
 
                     <div class="col">
-                        <button id="book-modal-red-cart" class="book-card-redirects"><i
-                                class="bi bi-cart fs-4"></i></button>
+                        <button (click)="iniciarCompra('carrito')" id="book-modal-red-cart" class="book-card-redirects"><i
+                            class="bi bi-cart fs-4"></i></button>
                     </div>
 
                     <div class="col">
-                        <button class="book-card-redirects"><i class="bi bi-credit-card-fill fs-4"></i></button>
+                        <button (click)="iniciarCompra('checkout')" class="book-card-redirects"><i class="bi bi-credit-card-fill fs-4"></i></button>
                     </div>
                 </div>
             </div>

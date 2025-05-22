@@ -41,7 +41,7 @@ export class HomeComponent implements OnInit{
         this.librosRow2 = response.slice(5, 10);
       },
       (error) => {
-        console.error('Error cargando la dirección del usuario:', error);
+        console.error('Error cargando los libros mas recientes:', error);
       }
     );
   }

@@ -14,10 +14,10 @@ import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 })
 export class HeaderComponent implements OnInit{
   constructor(
-    private router: Router, 
+    private router: Router,
     private route: ActivatedRoute,
-    private tokenService:TokenService
-    ) {}
+    private tokenService: TokenService
+  ) { }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {

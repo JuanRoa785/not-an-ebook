@@ -15,7 +15,7 @@ import { ModalPerfilComponent } from '../../components/modal-perfil/modal-perfil
   imports: [ 
     NgClass,
     CommonModule, 
-    FormsModule,
+    FormsModule
   ],
   templateUrl: './perfil.component.html',
   styleUrl: './perfil.component.css'

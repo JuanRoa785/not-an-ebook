@@ -2,6 +2,9 @@ import { Component, Input, TemplateRef} from '@angular/core';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { AppService } from '../../app.service';
 import { Router } from '@angular/router';
+import { ModalVerifComponent } from '../../components/modal-verif/modal-verif.component';
+import { TokenService } from '../../token.service';
+
 
 @Component({
   selector: 'app-card-libro',
@@ -14,7 +17,8 @@ export class CardLibroComponent {
   constructor(
     private appService: AppService,
     private router:Router,
-    private modalService:NgbModal
+    private modalService:NgbModal,
+    private tokenService:TokenService
   ){};
 
   @Input() libro!: { 
@@ -95,5 +99,58 @@ export class CardLibroComponent {
 
   formatearSinopsis(sinopsis:string): string {
     return sinopsis.replace(/\\n\\n/g, '<br><br>')
+  }
+
+  redirigir(destino: string) {
+    this.appService.agregarLibroCarrito(this.libro.id, this.cantidadComprar).subscribe(
+      (response: any) => {
+        // Solo si todo salió bien
+        if (destino === 'checkout') {
+          this.router.navigate(['/checkout']);
+        } else {
+          this.router.navigate(['cliente/carrito']);
+        }
+        this.modalService.dismissAll(); // Cerramos los modales
+      },
+      (error: any) => {
+        console.error('Error añadiendo un producto al carrito:', error);
+      }
+    );
+  }
+
+
+  iniciarCompra(destino: string) {
+    this.tokenService.isAuthenticated().subscribe(
+      (isAuth) => {
+        const modalRef = this.modalService.open(
+          ModalVerifComponent, {
+          backdrop: 'static',
+          centered: true,
+        });
+
+        if (!isAuth) {
+          const infoModal = {
+            titulo: '¿Ya iniciaste sesión?',
+            mensaje: `Parece que no has iniciado sesión, hazlo e intenta nuevamente`
+          };
+
+          modalRef.componentInstance.modal = infoModal;
+          modalRef.componentInstance.tareaARealizar = () => this.router.navigate(['/login']);;
+        } else {
+
+          const infoModal = {
+            titulo: '¿Esta seguro?',
+            mensaje: `¿De verdad quiere agregar al carrito el siguiente libro? <br> <br> Titulo: ${this.libro.nombre} <br> <br> Cantidad: ${this.cantidadComprar}`
+          };
+
+          if (destino == 'checkout') {
+            infoModal.mensaje = `¿De verdad quiere comprar el siguiente libro? <br> <br> Titulo: ${this.libro.nombre} <br> <br>  Cantidad: ${this.cantidadComprar}`
+          }
+
+          modalRef.componentInstance.modal = infoModal;
+          modalRef.componentInstance.tareaARealizar = () => this.redirigir(destino);
+        }
+      }
+    )
   }
 }

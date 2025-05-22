@@ -173,15 +173,14 @@ export class AppService {
         return this.http.delete(this.url + `/libro/${idLibro}`, { headers });
     }
 
-    obtenerCarrito() {
+    getCarrito() {
         const token = this.tokenService.getToken();
         const headers = new HttpHeaders({
             'Authorization': `Bearer ${token}`
         });
 
         const params = new HttpParams()
-            .set('email', this.tokenService.getUserEmail()?.sub || 'n.a'
-        );
+            .set('email', this.tokenService.getUserEmail()?.sub || 'n.a');
 
         return this.http.get(this.url + `/carrito/listByEmail`, { headers, params });
     }
@@ -192,7 +191,7 @@ export class AppService {
             'Authorization': `Bearer ${token}`
         });
 
-        return this.obtenerCarrito().pipe(
+        return this.getCarrito().pipe(
             switchMap((response: any) => {
                 const formatJson = {
                     idCarrito: response.id,
@@ -202,6 +201,28 @@ export class AppService {
                 return this.http.post(this.url + `/detalle-carrito/agregar`, formatJson, { headers });
             })
         );
+    }
+
+    eliminarDetalleCarrito(idDetalle:number){
+        const token = this.tokenService.getToken();
+        const headers = new HttpHeaders({
+            'Authorization': `Bearer ${token}`
+        });
+    
+        return this.http.delete(this.url + `/detalle-carrito/eliminar/${idDetalle}`, { headers });
+    }
+
+    actualizarDetalleCarrito(idDetalle:number, cantidad:number){
+        const token = this.tokenService.getToken();
+        const headers = new HttpHeaders({
+            'Authorization': `Bearer ${token}`
+        });
+        
+        const params = new HttpParams()
+            .set('idDetalleCarrito', idDetalle)
+            .set('cantidad', cantidad);
+
+        return this.http.put(this.url + `/detalle-carrito/actualizar`, null, { headers, params });
     }
 
 }

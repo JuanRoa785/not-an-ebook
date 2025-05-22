@@ -21,6 +21,16 @@ export class MenuAdminComponent {
         if (!isAuth) {
           alert("No has iniciado sesión, por favor hazlo e intenta nuevamente.");
           this.router.navigate(['/login']);
+        } else if (true) {
+          //Verificamos que sea admin!
+          this.tokenService.getUserRole().subscribe(
+            (response) => {
+              if (response != '1') {
+                alert("¡No puedes estar aquí!");
+                this.router.navigate(['/']);
+              }
+            }
+          )
         }
       }
     )

@@ -1,10 +1,11 @@
 import { Component,Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-modal-verif',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './modal-verif.component.html',
   styleUrl: './modal-verif.component.css'
 })
@@ -16,6 +17,7 @@ export class ModalVerifComponent {
   @Input() modal!: {
     titulo: string,
     mensaje: string,
+    notificacion: boolean
   }
 
   @Input() tareaARealizar!: () => void;

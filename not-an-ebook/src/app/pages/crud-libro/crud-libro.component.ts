@@ -124,13 +124,14 @@ export class CrudLibroComponent {
         const modalRef = this.modalService.open(
           ModalVerifComponent, {
           backdrop: 'static',
-          centered: true,
+          centered: true
         }
         );
 
         const infoModal = {
           titulo: 'Operación Exitosa',
-          mensaje: 'Se actualizó la información correctamente, puede verificarla en el inventario'
+          mensaje: 'Se actualizó la información correctamente, puede verificarla en el inventario',
+          notificacion: true
         };
 
         modalRef.componentInstance.modal = infoModal;

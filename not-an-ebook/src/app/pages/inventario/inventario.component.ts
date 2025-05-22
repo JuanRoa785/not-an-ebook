@@ -118,7 +118,8 @@ export class InventarioComponent implements OnInit {
 
     const infoModal = {
       titulo: '¿Esta seguro?',
-      mensaje: `¿De verdad quiere eliminar el libro con ID = ${idLibro}? <br> <br> ¡Esta información no podrá ser recuperada!`
+      mensaje: `¿De verdad quiere eliminar el libro con ID = ${idLibro}? <br> <br> ¡Esta información no podrá ser recuperada!`,
+      notificacion: false
     };
 
     modalRef.componentInstance.modal = infoModal;

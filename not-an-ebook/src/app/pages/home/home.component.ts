@@ -3,7 +3,6 @@ import { CommonModule} from '@angular/common';
 import { CardLibroComponent } from '../../components/card-libro/card-libro.component';
 import { AppService } from '../../app.service';
 import { Router } from '@angular/router';
-import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-home',

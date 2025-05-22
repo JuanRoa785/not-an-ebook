@@ -97,8 +97,9 @@ export class CarritoComponent {
           );
       
           const infoModal = {
-            titulo: '',
-            mensaje: `¡Tu carrito de compras esta vacio, por favor añade un libro!`
+            titulo: '¡No tan rapido!',
+            mensaje: `¡Tu carrito de compras esta vacio, por favor añade un libro!`,
+            notificacion: true
           };
       
           modalRef.componentInstance.modal = infoModal;

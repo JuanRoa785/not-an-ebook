@@ -3,7 +3,7 @@
         <h5 class="modal-title" id="titleModalLabel">
             <b style="font-weight: 600;">{{modal.titulo}}</b>
         </h5>
-        <button (click)="closeModal()" type="button" class="btn btn-danger">X</button>
+        <button *ngIf="!modal.notificacion" (click)="closeModal()" type="button" class="btn btn-danger">X</button>
     </div>
 
     <div class="modal-body">

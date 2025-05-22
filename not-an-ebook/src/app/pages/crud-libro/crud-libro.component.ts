@@ -26,6 +26,7 @@ export class CrudLibroComponent {
       this.idLibro = params['idLibro'];
     });
     this.getLibroInfo();
+    this.getEditoriales();
     this.getGenerosLiterarios();
   }
 
@@ -94,14 +95,26 @@ export class CrudLibroComponent {
     );
   }
 
+  editoriales: string[] = []
+  getEditoriales() {
+    this.appService.getEditoriales().subscribe(
+      (response:string[]) => {
+        this.editoriales =  response;
+      },
+      (error) => {
+        console.error('Error cargando los generos Literarios mas recientes:', error);
+      }
+    );
+  }
+
   strError = '';
 
   camposValidos(): boolean {
     this.strError = ''
     //Nulos -> String
     if (this.libro.nombre == '' || this.libro.sinopsis == '' || this.libro.portada == '' ||
-      this.libro.autor == '' || this.libro.coleccion == '') {
-      this.strError = 'El nombre, la sinopsis, la url de la portada, el autor o el libro estan vacios';
+      this.libro.autor == '' || this.libro.coleccion == '' || this.libro.editorial == '') {
+      this.strError = '¡El nombre, la sinopsis, la url de la portada, el autor, la editorial o la coleccion estan vacios!';
       return false;
     }
 

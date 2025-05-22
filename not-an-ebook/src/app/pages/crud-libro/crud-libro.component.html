@@ -75,42 +75,12 @@
             <div class="mb-3 row">
                 <div class="col">
                     <p class="mb-0 me-2">Editorial</p>
-                    <select [(ngModel)]="libro.editorial" class="form-select" id="libro-editorial"
-                        name="libro-editorial">
-                        <option value="Planeta">Planeta</option>
-                        <option value="Debolsillo">Debolsillo</option>
-                        <option value="Minotauro">Minotauro</option>
-                        <option value="Molino">Molino</option>
-                        <option value="Alfaguara">Alfaguara</option>
-                        <option value="Salamandra">Salamandra</option>
-                        <option value="Booket">Booket</option>
-                        <option value="Alianza">Alianza</option>
-                        <option value="Penguin Clasicos">Penguin Clasicos</option>
-                        <option value="Oceano de Colombia">Oceano de Colombia</option>
-                        <option value="Vintage">Vintage</option>
-                        <option value="Espasa">Espasa</option>
-                        <option value="Tusquets Editores">Tusquets Editores</option>
-                        <option value="Plaza & Janes S.A">Plaza & Janes S.A</option>
-                        <option value="B. Ediciones B.">B. Ediciones B.</option>
-                        <option value="Austral">Austral</option>
-                        <option value="CrossBooks">CrossBooks</option>
-                        <option value="Viking Books">Viking Books</option>
-                        <option value="Promolibro">Promolibro</option>
-                        <option value="Siruela">Siruela</option>
-                        <option value="Tor">Tor</option>
-                        <option value="Ediciones Destino">Ediciones Destino</option>
-                        <option value="Plaza & Janes">Plaza & Janes</option>
-                        <option value="Harper Bolsillo">Harper Bolsillo</option>
-                        <option value="Desclasados">Desclasados</option>
-                        <option value="Calixta Editores">Calixta Editores</option>
-                        <option value="Everest">Everest</option>
-                        <option value="Visor Libros">Visor Libros</option>
-                        <option value="Obscura">Obscura</option>
-                        <option value="Esencia">Esencia</option>
-                        <option value="Suma">Suma</option>
-                        <option value="L`Aleph">L`Aleph</option>
-                        <option value="N de Novela">N de Novela</option>
-                    </select>
+                    <input list="editoriales-list" [(ngModel)]="libro.editorial" class="form-control" 
+                    name="libro-editorial" id="libro-editorial" placeholder="Escribe o selecciona una editorial" />
+
+                    <datalist id="editoriales-list">
+                        <option *ngFor="let editorial of editoriales" [value]="editorial"></option>
+                    </datalist>
                 </div>
 
                 <div class="col">
@@ -150,7 +120,7 @@
 
             <div style="display: flex; justify-content: center; align-items: center; margin-top: 5px;">
                 <p *ngIf="strError.length > 1 " id="error-general"
-                    style="color: red; font-weight: 600; margin-left: 15px;">
+                    style="color: red; font-weight: 600; margin-left: 15px; text-align: center;">
                     {{strError}}
                 </p>
             </div>

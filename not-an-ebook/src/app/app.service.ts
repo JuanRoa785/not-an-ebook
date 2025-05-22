@@ -225,4 +225,17 @@ export class AppService {
         return this.http.put(this.url + `/detalle-carrito/actualizar`, null, { headers, params });
     }
 
+    registrarVenta(correoUsuario:string, observaciones:string) {
+        const token = this.tokenService.getToken();
+        const headers = new HttpHeaders({
+            'Authorization': `Bearer ${token}`
+        });
+
+        const params = new HttpParams()
+            .set('correoUsuario', correoUsuario)
+            .set('observaciones', observaciones);
+
+        return this.http.post(this.url + `/venta/registrar`, null, { headers, params });
+    }
+
 }

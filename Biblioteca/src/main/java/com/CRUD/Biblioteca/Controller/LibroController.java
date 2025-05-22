@@ -26,6 +26,11 @@ public class LibroController {
         return ResponseEntity.ok(generoLiterarioService.obtenerGenerosOrdenadosPorLibros());
     }
 
+    @GetMapping("/listarEditoriales")
+    public ResponseEntity<List<String>> obtenerEditoriales() {
+        return ResponseEntity.ok(libroService.findDistinctEditoriales());
+    }
+
     @GetMapping("/listarLibros")
     public ResponseEntity<List<Libro>> obtenerLibros() {
         return ResponseEntity.ok(libroService.findAll());

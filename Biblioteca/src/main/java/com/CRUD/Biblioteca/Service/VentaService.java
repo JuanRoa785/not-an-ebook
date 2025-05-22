@@ -326,7 +326,12 @@ public class VentaService implements VentaRepository {
 
         //direccion
         Direccion direccion = direccionService.findByUsuarioId(usuario.getId());
-        venta.setDireccion(direccion.getDireccion());
+        String direccionCompleta = direccion.getPais() + "-" +
+                direccion.getRegion() + "-" +
+                direccion.getCiudad() + "-" +
+                direccion.getCodigo_postal() + "-" +
+                direccion.getDireccion();
+        venta.setDireccion(direccionCompleta);
 
         venta = ventaRepository.save(venta);
 

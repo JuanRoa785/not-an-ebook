@@ -177,6 +177,11 @@ public class LibroService implements LibroRepository {
         return libroRepository.Filtro_libros(nombre, genero);
     }
 
+    @Override
+    public List<String> findDistinctEditoriales(){
+        return libroRepository.findDistinctEditoriales();
+    }
+
     public Libro actualizarLibro(Integer id, Libro libroActualizado) {
         Libro libro = libroRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Libro no encontrado con id: " + id));

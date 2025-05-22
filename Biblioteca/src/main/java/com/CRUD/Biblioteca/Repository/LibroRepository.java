@@ -17,4 +17,7 @@ public interface LibroRepository extends JpaRepository<Libro, Integer> {
     """, nativeQuery = true)
     List<Libro> Filtro_libros(@Param("nombre") String nombre, @Param("genero") String genero);
 
+    @Query(value = "SELECT DISTINCT editorial FROM libro", nativeQuery = true)
+    List<String> findDistinctEditoriales();
+
 }

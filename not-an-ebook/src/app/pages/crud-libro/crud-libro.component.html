@@ -76,7 +76,8 @@
                 <div class="col">
                     <p class="mb-0 me-2">Editorial</p>
                     <input list="editoriales-list" [(ngModel)]="libro.editorial" class="form-control" 
-                    name="libro-editorial" id="libro-editorial" placeholder="Escribe o selecciona una editorial" />
+                    name="libro-editorial" id="libro-editorial" placeholder="Escribe o selecciona una editorial" 
+                    autocomplete="off"/>
 
                     <datalist id="editoriales-list">
                         <option *ngFor="let editorial of editoriales" [value]="editorial"></option>

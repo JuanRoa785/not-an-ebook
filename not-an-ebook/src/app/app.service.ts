@@ -21,6 +21,10 @@ export class AppService {
         return this.http.get(this.url + '/libro/generos-ordenados');
     }
 
+    getEditoriales(): Observable<any> {
+        return this.http.get(this.url + '/libro/listarEditoriales');
+    }
+
     getLibros(): Observable<any> {
         return this.http.get(this.url + '/libro/listarLibros');
     }

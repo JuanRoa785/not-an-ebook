@@ -105,7 +105,7 @@ export class CarritoComponent {
           modalRef.componentInstance.modal = infoModal;
           modalRef.componentInstance.tareaARealizar = () => this.router.navigate(['/buscarLibro'], { queryParams: { titulo: "", genero: "" } });
     }else {
-      this.router.navigate(['/checkout']);
+      window.location.href = '/checkout';;
     }
   }
 

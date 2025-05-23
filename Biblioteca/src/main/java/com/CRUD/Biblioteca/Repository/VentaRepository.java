@@ -54,9 +54,12 @@ public interface VentaRepository extends JpaRepository<Venta, Integer> {
     @Query("""
            SELECT v
            FROM   Venta v
-           WHERE  UPPER(v.usuario.nombres) LIKE %:cliente%
+           WHERE  (
+             UPPER(v.usuario.nombres) LIKE %:cliente%
+             OR UPPER(v.usuario.apellidos) LIKE %:cliente%
+           )
              AND  v.fecha BETWEEN :fechaInferior AND :fechaSuperior
-           ORDER  BY v.fecha DESC
+           ORDER  BY v.total DESC
            """)
     List<Venta> reporteIndividualDesc(@Param("cliente") String cliente,
                                       @Param("fechaInferior") Date fechaInferior,
@@ -65,9 +68,12 @@ public interface VentaRepository extends JpaRepository<Venta, Integer> {
     @Query("""
            SELECT v
            FROM   Venta v
-           WHERE  UPPER(v.usuario.nombres) LIKE %:cliente%
+           WHERE  (
+             UPPER(v.usuario.nombres) LIKE %:cliente%
+             OR UPPER(v.usuario.apellidos) LIKE %:cliente%
+           )
              AND  v.fecha BETWEEN :fechaInferior AND :fechaSuperior
-           ORDER  BY v.fecha ASC
+           ORDER  BY v.total ASC
            """)
     List<Venta> reporteIndividualAsc(@Param("cliente") String cliente,
                                      @Param("fechaInferior") Date fechaInferior,

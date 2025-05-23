@@ -242,4 +242,18 @@ export class AppService {
         return this.http.post(this.url + `/venta/registrar`, null, { headers, params });
     }
 
+    getOrdenesUsuario(tituloLibro:string, ordenDesc:boolean) {
+        const token = this.tokenService.getToken();
+        const headers = new HttpHeaders({
+            'Authorization': `Bearer ${token}`
+        });
+
+        const params = new HttpParams()
+            .set('correoUsuario', this.tokenService.getUserEmail()?.sub || 'n.a')
+            .set('nombre', tituloLibro)
+            .set('decsFecha', ordenDesc);
+
+        return this.http.get(this.url + `/venta/listar/filtro/usuario`, { headers, params });
+    }
+
 }

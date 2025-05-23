@@ -256,4 +256,19 @@ export class AppService {
         return this.http.get(this.url + `/venta/listar/filtro/usuario`, { headers, params });
     }
 
+    getVentas(cliente:string, fechaInferior:string, fechaSuperior:string, 
+              totalDesc:boolean): Observable<any> {
+        const token = this.tokenService.getToken();
+        const headers = new HttpHeaders({
+            'Authorization': `Bearer ${token}`
+        });
+
+        const params = new HttpParams()
+            .set('cliente', cliente)
+            .set('fechaInferior', fechaInferior)
+            .set('fechaSuperior', fechaSuperior)
+            .set('totalDesc', totalDesc);
+        return this.http.get(this.url + `/venta/reporte-individual`, { headers, params });
+    }
+
 }

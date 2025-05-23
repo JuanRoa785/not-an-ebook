@@ -41,22 +41,37 @@ h5 {
     font-size: 18px;
 }
 
-.carousel-control-prev, .carousel-control-next {
-    width: 5%;
+.carousel-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 98vw;
+  flex-wrap: nowrap;
 }
 
-.carousel-control-prev {
-    left: 2%;
+.carousel-content {
+  flex: 1;
+  min-width: 0;
 }
 
-.carousel-control-next {
-    right: 3%;
+.carousel-arrow {
+  font-size: 5rem;
+  padding: 0px;
+  border: none;
+  background-color: inherit;
+  color: #333;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
 }
 
-.custom-arrow {
-    margin: 0px;
-    padding: 0px;
-    font-size: 50px;
+.carousel-arrow.left {
+  margin: 0px
+}
+
+.carousel-arrow.right {
+  margin: 0px
 }
 
 .row {

@@ -42,11 +42,34 @@
                     rows="4" placeholder="Sinopsis aquí:"></textarea>
             </div>
 
-            <div class="mb-3">
+            <!--<div class="mb-3">
                 <p class="form-label">URL Portada</p>
                 <textarea [(ngModel)]="libro.portada" class="form-control" id="libro-portada" name="bookImage" rows="2"
-                    placeholder="Sinopsis aquí:"></textarea>
+                    placeholder="portada aquí:"></textarea>
+            </div>-->
+
+            <div class="mb-3 d-flex align-items-center gap-3">
+                <!-- Imagen seleccionada -->
+                <img *ngIf="tempUrlnewImg == '' && libro.portada" [src]="libro.portada" alt="Previsualización de portada" 
+                    width="100" class="img-thumbnail"
+                />
+
+                <img *ngIf="tempUrlnewImg != ''" [src]="tempUrlnewImg" alt="Previsualización de portada" 
+                    width="100" class="img-thumbnail"
+                />
+
+                <!-- Input de archivo -->
+                <div>
+                    <p class="form-label">Portada</p>
+                    <label for="portada" class="btn save-btn">
+                        Seleccionar imagen
+                    </label>
+                    <input (change)="onFileChange($event)" type="file" id="portada" name="portada" 
+                    accept="image/png, image/jpeg, image/webp, image/jpg" hidden
+                    />
+                </div>
             </div>
+
 
             <div class="mb-3">
                 <p class="form-label">Precio</p>
@@ -118,6 +141,11 @@
                 style="width: 100%; margin-bottom: 10px;">
                 Guardar Cambios
             </button>
+
+            <div *ngIf="isLoading" class="d-flex align-items-center justify-content-center">
+                <i id="spinning-loading-arrow" class="bi bi-arrow-repeat spin"></i>
+                <span class="ms-2">Cargando...</span>
+            </div>
 
             <div style="display: flex; justify-content: center; align-items: center; margin-top: 5px;">
                 <p *ngIf="strError.length > 1 " id="error-general"

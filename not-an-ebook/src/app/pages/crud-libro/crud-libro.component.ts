@@ -73,7 +73,8 @@ export class CrudLibroComponent {
         this.libro = response; 
         this.libro.fecha_publicacion = this.libro.fecha_publicacion.slice(0,10);
         this.libro['generoLiterarioId'] = this.libro.generoLiterario.id;
-        console.log(this.libro);
+        this.imagenSeleccionada = this.libro['portada']
+        //console.log(this.libro);
         //console.log(response);
       },
       (error) => {
@@ -112,9 +113,14 @@ export class CrudLibroComponent {
   camposValidos(): boolean {
     this.strError = ''
     //Nulos -> String
-    if (this.libro.nombre == '' || this.libro.sinopsis == '' || this.libro.portada == '' ||
+    if (this.libro.nombre == '' || this.libro.sinopsis == '' || //this.libro.portada == '' ||
       this.libro.autor == '' || this.libro.coleccion == '' || this.libro.editorial == '') {
       this.strError = '¡El nombre, la sinopsis, la url de la portada, el autor, la editorial o la coleccion estan vacios!';
+      return false;
+    }
+
+    if (this.imagenSeleccionada == null) {
+      this.strError = '¡La Portada es invalida!';
       return false;
     }
 
@@ -127,12 +133,23 @@ export class CrudLibroComponent {
     return true;
   }
 
+  imagenSeleccionada!: File;
+  tempUrlnewImg:string = '';
+  isLoading: boolean = false;
+
+  onFileChange(event: any) {
+    this.imagenSeleccionada = event.target.files[0];
+    this.tempUrlnewImg = URL.createObjectURL(this.imagenSeleccionada);
+  }
+
   gestionarLibro() {
     if (!this.camposValidos()) {
       return;
     }
 
-    this.appService.gestionarLibro(this.libro).subscribe(
+    this.isLoading = true;
+
+    this.appService.gestionarLibro(this.libro, this.imagenSeleccionada).subscribe(
       (response) => {
         const modalRef = this.modalService.open(
           ModalVerifComponent, {
@@ -149,9 +166,27 @@ export class CrudLibroComponent {
 
         modalRef.componentInstance.modal = infoModal;
         modalRef.componentInstance.tareaARealizar = () => this.router.navigate(['/admin/inventario']);
+        this.isLoading = false;
       },
       (error) => {
+        const modalRef = this.modalService.open(
+          ModalVerifComponent, {
+          backdrop: 'static',
+          centered: true
+        }
+        );
+
+        const infoModal = {
+          titulo: '¡Ha ocurrido un error!',
+          mensaje: 'Verifica que la imagen cargada no supere los 10MB e intentalo nuevamente',
+          notificacion: true
+        };
+
+        modalRef.componentInstance.modal = infoModal;
+        modalRef.componentInstance.tareaARealizar = () => modalRef.close();
+
         console.error('Error gestionando el libro:', error);
+        this.isLoading = false;
       }
     );
   }

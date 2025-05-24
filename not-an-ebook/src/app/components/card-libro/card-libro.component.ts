@@ -65,7 +65,7 @@ export class CardLibroComponent {
 
   getStock(): {nombre: string, color: string} {
     if (this.libro != null) {
-      if (this.libro.stock > 10) {
+      if (this.libro.stock >= 10) {
         return {nombre: 'Disponible', color:'#28a745'};
       }
       else if (this.libro.stock > 0 && this.libro.stock < 10) {

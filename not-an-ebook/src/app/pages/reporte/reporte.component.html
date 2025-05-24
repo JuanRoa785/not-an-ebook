@@ -100,8 +100,9 @@
             </tr>
         </tbody>
     </table>
-    <ngb-pagination class="d-flex justify-content-center paginator" [(page)]="currentPage" [pageSize]="itemsPerPage"
-        [collectionSize]="ventas.length" (pageChange)="onPageChange($event)" aria-label="Default pagination">
+    <ngb-pagination class="d-flex justify-content-center paginator" [maxSize]="paginationMaxSize" [rotate]="true" 
+    [boundaryLinks]="true" [(page)]="currentPage" [pageSize]="itemsPerPage" [collectionSize]="ventas.length" 
+    (pageChange)="onPageChange($event)" aria-label="Default pagination">
     </ngb-pagination>
 </div>
 

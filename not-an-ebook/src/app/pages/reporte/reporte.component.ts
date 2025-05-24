@@ -42,6 +42,9 @@ export class ReporteComponent implements OnInit{
     this.earliestDate = this.getToday();
     this.latestDate = this.getToday();
     this.getSales();
+
+    this.updatePaginationSize();
+    window.addEventListener('resize', this.updatePaginationSize.bind(this));
   }
 
   getToday() {
@@ -174,10 +177,32 @@ export class ReporteComponent implements OnInit{
 
   onPageChange(page: number): void {
     this.currentPage = page;
+
+    requestAnimationFrame(() => {
+      const activeElement = document.activeElement as HTMLElement;
+      if (activeElement && activeElement.blur) {
+        activeElement.blur();
+      }
+    });
   }
 
   showSaleDetail(sale: any) {
     this.selectedSale = sale;
     this.viewDetail = true;
   }
+
+  paginationMaxSize: number = 8;
+
+  updatePaginationSize(): void {
+    const width = window.innerWidth;
+
+    if (width < 500) {
+      this.paginationMaxSize = 4;
+    } else if (width < 768) {
+      this.paginationMaxSize = 5;
+    } else {
+      this.paginationMaxSize = 8;
+    }
+  }
+
 }

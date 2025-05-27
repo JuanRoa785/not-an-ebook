@@ -77,17 +77,36 @@ cd not-an-ebook
  Correo: `laura@lopez.com`  
  Contraseña: `lauralaura`
 
+---
+
 ## ✨ Funcionalidades principales
+
 - **Gestión de biblioteca digital**
 - **Visualización y simulación de venta de libros**
 - **Interfaz gráfica intuitiva**
 - **Almacenamiento de datos persistente**
 - **Arquitectura modular y escalable**
+- **Servicio intermedio con Cloudinary** para almacenar y acceder eficientemente a las portadas de los libros
+
+---
+
+## 🗂️ Datos precargados en la base de datos
+
+La base de datos viene con información de ejemplo que permite probar todas las funcionalidades del sistema desde el primer momento:
+
+- 📚 **75 productos** (libros físicos)
+- 👥 **100 usuarios** con sus respectivas direcciones
+- 🧾 **1500 ventas** registradas
+- 📦 **3700 detalles de venta** asociados a los pedidos
+
+---
 
 ## 👥 Integrantes del equipo
    - **Kevin Guzman**
    - **Juan Roa**
    - **Daniel Ballesteros**
+
+---
 
 ### 📌 Primera versión del proyecto
 🔗 https://github.com/Kevin2211875/not-an-ebook.git

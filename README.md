@@ -53,17 +53,17 @@ cd not-an-ebook
 3. Acceder a la aplicacion en el puerto correspondiente mediante localhost
 
 4. 
-*Funcionalidades principales*
-#Gestión de biblioteca digital
-#Visualización de libros
-#Interfaz gráfica intuitiva
-#Almacenamiento de datos persistente
-#Arquitectura modular y escalable
+##Funcionalidades principales
+-**Gestión de biblioteca digital**
+-**Visualización de libros**
+-**Interfaz gráfica intuitiva**
+-**Almacenamiento de datos persistente**
+-**Arquitectura modular y escalable**
 
-5. Integrantes
-   -Kevin Dannie
-   -Juan Roa
-   -Daniel Ballesteros
+5. ##Integrantes
+   -**Kevin Dannie**
+   -**Juan Roa**
+   -**Daniel Ballesteros**
 
 
 

@@ -10,8 +10,7 @@ import java.util.List;
 public interface VentaRepository extends JpaRepository<Venta, Integer> {
 
     @Query("""
-
-            SELECT v
+           SELECT v
            FROM   Venta v
              JOIN v.detalleVenta d
            WHERE  d.libro.id = :idLibro

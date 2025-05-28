@@ -10,7 +10,8 @@ import java.util.List;
 public interface VentaRepository extends JpaRepository<Venta, Integer> {
 
     @Query("""
-           SELECT v
+
+            SELECT v
            FROM   Venta v
              JOIN v.detalleVenta d
            WHERE  d.libro.id = :idLibro
@@ -54,9 +55,13 @@ public interface VentaRepository extends JpaRepository<Venta, Integer> {
     @Query("""
            SELECT v
            FROM   Venta v
-           WHERE  UPPER(v.usuario.nombres) LIKE %:cliente%
+           WHERE  (
+             UPPER(v.usuario.nombres) LIKE %:cliente%
+             OR UPPER(v.usuario.apellidos) LIKE %:cliente%
+             OR UPPER(CONCAT(v.usuario.nombres, ' ', v.usuario.apellidos)) LIKE %:cliente%
+           )
              AND  v.fecha BETWEEN :fechaInferior AND :fechaSuperior
-           ORDER  BY v.fecha DESC
+           ORDER  BY v.total DESC
            """)
     List<Venta> reporteIndividualDesc(@Param("cliente") String cliente,
                                       @Param("fechaInferior") Date fechaInferior,
@@ -65,9 +70,13 @@ public interface VentaRepository extends JpaRepository<Venta, Integer> {
     @Query("""
            SELECT v
            FROM   Venta v
-           WHERE  UPPER(v.usuario.nombres) LIKE %:cliente%
+           WHERE  (
+             UPPER(v.usuario.nombres) LIKE %:cliente%
+             OR UPPER(v.usuario.apellidos) LIKE %:cliente%
+             OR UPPER(CONCAT(v.usuario.nombres, ' ', v.usuario.apellidos)) LIKE %:cliente%
+           )
              AND  v.fecha BETWEEN :fechaInferior AND :fechaSuperior
-           ORDER  BY v.fecha ASC
+           ORDER  BY v.total ASC
            """)
     List<Venta> reporteIndividualAsc(@Param("cliente") String cliente,
                                      @Param("fechaInferior") Date fechaInferior,

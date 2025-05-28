@@ -1,27 +1,26 @@
 
+
 # 📚 Not an eBook
 
-**Not an eBook** es una plataforma digital diseñada para la gestión, visualización y simulación de la venta de libros físicos.  
-Este proyecto tiene como objetivo ofrecer una solución moderna e intuitiva que facilite la comercialización de libros, integrando una interfaz amigable, persistencia de datos y despliegue mediante contenedores Docker.
-
+**Not an eBook** es una plataforma de comercio electrónico enfocada en la venta de libros. Su objetivo principal es ofrecer una experiencia clara y eficiente tanto para los usuarios que desean comprar libros digitales, como para el dueño del emprendimiento, quien puede llevar el control de las ventas y gestionar fácilmente el catálogo de productos disponibles.
 
 ## 🚀 Descripción del Proyecto
 
-La aplicación permite a los usuarios acceder a una biblioteca digital organizada, visualizar libros, registrar información relevante y simular una experiencia personalizada de compra y venta.  
-Gracias a una arquitectura moderna, se integran de forma cohesiva el backend, el frontend y la base de datos, garantizando fluidez y eficiencia en el funcionamiento del sistema.
-
+Esta aplicación permite a los clientes consultar libros, ver sus detalles, y simular una compra. Al mismo tiempo, el administrador del sistema puede gestionar (crear, leer, actualizar y eliminar) libros del inventario de forma sencilla, con soporte de imágenes alojadas en la nube mediante **Cloudinary**. Esta doble funcionalidad permite controlar el flujo de ventas, la visualización del catálogo, y la administración eficiente de los productos.
 
 ## 🛠️ Tecnologías Utilizadas
 
-- **Java** – Lógica del backend.
-- **Spring Boot** – Framework para el desarrollo de servicios backend.
-- **Docker & Docker Compose** – Para contenerización y despliegue.
-- **TypeScript & Angular** – Para el desarrollo del frontend (si aplica).
-- **HTML/CSS** – Estructura y diseño de la interfaz.
-- **PostgreSQL / MySQL** – Base de datos relacional (según configuración).
-- **Jupyter Notebook** – Para automatizar la población de la base de datos.
+- **Java + Spring Boot** – Backend y lógica del sistema
+- **Docker & Docker Compose** – Despliegue y contenedores
+- **TypeScript & React** – Interfaz gráfica (si aplica)
+- **HTML/CSS** – Estructura y diseño de la interfaz
+- **PostgreSQL / MySQL** – Almacenamiento de datos
+- **Cloudinary** – Gestión de imágenes de los productos
+- **Jupyter Notebook** – Apoyo documental o análisis
 
 ## ⚙️ Estructura del Proyecto
+
+
 
 ```plaintext
 not-an-ebook/

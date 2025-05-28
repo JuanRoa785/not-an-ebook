@@ -33,6 +33,7 @@ export class BuscarLibroComponent {
       }
       this.selectedGenero = params['genero'];
       this.getGenerosLiterarios();
+      this.getEditoriales();
       this.getLibrosFiltrados();
       this.viewportScroller.scrollToPosition([0, 0]);
     });
@@ -54,25 +55,29 @@ export class BuscarLibroComponent {
     );
   }
 
-  editoriales: { nombre: string; checked: boolean }[] = [
-    {'nombre': 'Alfaguara', 'checked': false},
-    {'nombre': 'Salamandra', 'checked': false},
-    {'nombre': 'Booket', 'checked': false},
-    {'nombre': 'Alianza', 'checked': false},
-    {'nombre': 'Planeta', 'checked': false},
-    {'nombre': 'Debolsillo', 'checked': false},
-    {'nombre': 'Minotauro', 'checked': false},
-    {'nombre': 'Molino', 'checked': false},
-    {'nombre': 'Otras', 'checked': false},
-  ]
-
-  otrasEditoriales = ['N de Novela', 'Plaza & Janes', 'Harper Bolsillo', 'Desclasados',
-    'Penguin Clasicos', 'Calixta Editores', 'Everest', 'Visor Libros', 'Obscura', 'Esencia',
-    'Suma', 'L`Aleph', 'Ediciones Destino', 'Tusquets Editores', 'Plaza & Janes S.A',
-    'Oceano de Colombia', 'Espasa', 'B. Ediciones B.', 'Vintage', 'Austral', 'CrossBooks',
-    'Viking Books', 'Promolibro', 'Siruela', 'Tor']
-
+  editoriales: { nombre: string; checked: boolean }[] = []
+  otrasEditoriales:string[] = [];
   selectedEditoriales: string[] = [];
+
+  getEditoriales() {
+    this.appService.getEditoriales().subscribe(
+      (response:string[]) => {
+        //Mapeamos las primeras 9 editoriales como checkboxes
+        response.slice(0,9).forEach(editorial => {
+          this.editoriales.push({nombre:editorial, checked: false})
+        });
+
+        //Agregamos hardCoded la opción de otras:
+        this.editoriales.push({nombre:'Otras', checked: false})
+
+        this.otrasEditoriales = response.slice(9) //Resto de editoriales
+        //console.log(this.otrasEditoriales)
+      },
+      (error) => {
+        console.error('Error cargando los generos Literarios mas recientes:', error);
+      }
+    );
+  }
 
   updateEditorialesSelected(editorial: { nombre: string; checked: boolean }): void {
     editorial.checked = !editorial.checked

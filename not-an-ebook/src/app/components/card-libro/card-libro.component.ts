@@ -65,7 +65,7 @@ export class CardLibroComponent {
 
   getStock(): {nombre: string, color: string} {
     if (this.libro != null) {
-      if (this.libro.stock > 10) {
+      if (this.libro.stock >= 10) {
         return {nombre: 'Disponible', color:'#28a745'};
       }
       else if (this.libro.stock > 0 && this.libro.stock < 10) {
@@ -131,7 +131,8 @@ export class CardLibroComponent {
         if (!isAuth) {
           const infoModal = {
             titulo: '¿Ya iniciaste sesión?',
-            mensaje: `Parece que no has iniciado sesión, hazlo e intenta nuevamente`
+            mensaje: `Parece que no has iniciado sesión, hazlo e intenta nuevamente`,
+            notificacion: true
           };
 
           modalRef.componentInstance.modal = infoModal;
@@ -140,7 +141,8 @@ export class CardLibroComponent {
 
           const infoModal = {
             titulo: '¿Esta seguro?',
-            mensaje: `¿De verdad quiere agregar al carrito el siguiente libro? <br> <br> Titulo: ${this.libro.nombre} <br> <br> Cantidad: ${this.cantidadComprar}`
+            mensaje: `¿De verdad quiere agregar al carrito el siguiente libro? <br> <br> Titulo: ${this.libro.nombre} <br> <br> Cantidad: ${this.cantidadComprar}`,
+            notificacion: false
           };
 
           if (destino == 'checkout') {

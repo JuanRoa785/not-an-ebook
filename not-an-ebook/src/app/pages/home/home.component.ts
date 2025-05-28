@@ -3,12 +3,13 @@ import { CommonModule} from '@angular/common';
 import { CardLibroComponent } from '../../components/card-libro/card-libro.component';
 import { AppService } from '../../app.service';
 import { Router } from '@angular/router';
-import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
+import { NgbCarousel } from '@ng-bootstrap/ng-bootstrap';
+import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CardLibroComponent, CommonModule],
+  imports: [CardLibroComponent, CommonModule, NgbCarouselModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })

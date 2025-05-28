@@ -89,7 +89,8 @@ export class ModalPerfilComponent {
 
           const infoModal = {
             titulo: 'Actualización Exitosa',
-            mensaje: 'Ya que ha actualizado su correo electrónico, por favor inicie sesión nuevamente'
+            mensaje: 'Ya que ha actualizado su correo electrónico, por favor inicie sesión nuevamente',
+            notificacion: true
           };
 
           modalRef.componentInstance.modal = infoModal;

@@ -195,7 +195,8 @@ export class PerfilComponent  implements OnInit{
 
         const infoModal = {
           titulo: 'Actualización Exitosa',
-          mensaje: 'Ya que ha actualizado su contraseña, por favor inicie sesión nuevamente'
+          mensaje: 'Ya que ha actualizado su contraseña, por favor inicie sesión nuevamente',
+          notificacion: true
         };
 
         modalRef.componentInstance.modal = infoModal;

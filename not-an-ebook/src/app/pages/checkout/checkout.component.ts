@@ -36,7 +36,8 @@ export class CheckoutComponent {
 
           const infoModal = {
             titulo: '¿Ya iniciaste sesión?',
-            mensaje: `Parece que no has iniciado sesión, hazlo e intenta nuevamente`
+            mensaje: `Parece que no has iniciado sesión, hazlo e intenta nuevamente`,
+            notificacion: true
           };
 
           modalRef.componentInstance.modal = infoModal;
@@ -199,7 +200,8 @@ export class CheckoutComponent {
 
         const infoModal = {
           titulo: '¡Compra Exitosa!',
-          mensaje: `¡Tu pedido ha sido registrado!<br> Puedes seguir su progreso desde tu historial de compras.`
+          mensaje: `¡Tu pedido ha sido registrado!<br> Puedes seguir su progreso desde tu historial de compras.`,
+          notificacion: true
         };
 
         modalRef.componentInstance.modal = infoModal;
@@ -218,7 +220,8 @@ export class CheckoutComponent {
         const infoModal = {
           titulo: '¡Ha sucedido un error!',
           mensaje: `Es posible que alguno de los libros seleccionados ya no esté disponible.<br><br>
-          ¿Quieres ir al carrito y actualizar tu selección antes de intentarlo de nuevo?`
+          ¿Quieres ir al carrito y actualizar tu selección antes de intentarlo de nuevo?`,
+          notificacion: true
         };
 
         modalRef.componentInstance.modal = infoModal;
@@ -237,7 +240,8 @@ export class CheckoutComponent {
     if (!this.direccionValida()) {
       const infoModal = {
         titulo: 'Dirección invalida',
-        mensaje: `¡La dirección ingresada no es valida, actualizala para poder continuar con la compra!`
+        mensaje: `¡La dirección ingresada no es valida, actualizala para poder continuar con la compra!`,
+        notificacion: false
       };
 
       modalRef.componentInstance.modal = infoModal;
@@ -247,7 +251,8 @@ export class CheckoutComponent {
     const infoModal = {
       titulo: '¿Esta seguro?',
       mensaje: `¿Desea confirmar su pedido?<br><br>
-      ¡Verifique que la dirección de envío, los libros seleccionados y el total a pagar sean correctos!`
+      ¡Verifique que la dirección de envío, los libros seleccionados y el total a pagar sean correctos!`,
+      notificacion: false
     };
 
     modalRef.componentInstance.modal = infoModal;

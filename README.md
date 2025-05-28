@@ -31,9 +31,8 @@ not-an-ebook/
 ├── docker-compose.yaml   # Configuración de servicios con Docker
 ├── README.md
 ```
-##DIAGRAMA
-![image](https://github.com/user-attachments/assets/9a9f4a92-e8e9-4cab-ba02-4916727bbbd3)
-
+## Diagrama de la base de datos
+![not_an_ebook - public](https://github.com/user-attachments/assets/e4ad0031-3494-43b3-8d92-4d2852e7a789)
 
 ## 📦 Instalación y Ejecución Local
 
